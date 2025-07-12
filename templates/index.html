@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mzikart V2</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white p-10">
+  <h1 class="text-4xl font-bold mb-6 text-center">🎤 Mzikart V2 - Générateur de chanson IA</h1>
+  <form method="post" class="max-w-xl mx-auto bg-gray-800 p-6 rounded-xl space-y-4">
+    <input name="title" placeholder="Titre" required class="w-full p-2 rounded bg-gray-700 text-white">
+    <textarea name="verse" placeholder="Verse..." rows="3" class="w-full p-2 rounded bg-gray-700 text-white"></textarea>
+    <textarea name="chorus" placeholder="Chorus..." rows="2" class="w-full p-2 rounded bg-gray-700 text-white"></textarea>
+    <textarea name="bridge" placeholder="Bridge..." rows="2" class="w-full p-2 rounded bg-gray-700 text-white"></textarea>
+    <input name="tags" placeholder="Tags (trap, violin, sad...)" class="w-full p-2 rounded bg-gray-700 text-white">
+    <button class="w-full bg-indigo-600 hover:bg-indigo-700 p-2 rounded">🎶 Générer la chanson</button>
+  </form>
+
+  {% if lyrics %}
+  <div class="mt-10 max-w-2xl mx-auto bg-gray-800 p-6 rounded-xl">
+    <h2 class="text-2xl font-bold mb-2">Paroles générées</h2>
+    <pre class="whitespace-pre-wrap">{{ lyrics }}</pre>
+    <a href="{{ url_for('download_file', filename=file_name) }}" class="mt-4 inline-block bg-green-600 hover:bg-green-700 p-2 rounded">⬇️ Télécharger .txt</a>
+
+    <div class="mt-6">
+      <h3 class="text-xl font-semibold mb-1">🔊 Résultat audio (voix + instru)</h3>
+      <audio controls class="w-full">
+        <source src="{{ audio_file }}" type="audio/mp3">
+      </audio>
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>
